@@ -1,9 +1,12 @@
 import business.Calculator;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
@@ -57,7 +60,18 @@ public class CalculatorUI extends Application implements EventHandler<ActionEven
         equalButton.setPrefSize(100, 100);
         gridPane.add(equalButton, 1, 2, 1, 1);
 
-        Scene mainScene = new Scene(gridPane, 200, 300);
+        ObservableList<PieChart.Data> pieChartData =
+                FXCollections.observableArrayList(
+                        new PieChart.Data("Grapefruit", 13),
+                        new PieChart.Data("Oranges", 25),
+                        new PieChart.Data("Plums", 10),
+                        new PieChart.Data("Pears", 22),
+                        new PieChart.Data("Apples", 30));
+        final PieChart chart = new PieChart(pieChartData);
+        chart.setTitle("Imported Fruits");
+        gridPane.add(chart,0,3,2,1);
+
+        Scene mainScene = new Scene(gridPane, 300, 600);
         stage.setScene(mainScene);
         stage.show();
     }
